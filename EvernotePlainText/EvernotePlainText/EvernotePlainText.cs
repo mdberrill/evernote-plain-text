@@ -19,7 +19,7 @@ namespace EvernotePlainText
 
             var enmlContent = note.Content;
             var htmlNote = ENSessionAdvanced.SharedSession.NoteHTMLContent(enmlContent, new ENCollection());
-            return new PlainTextEvernoteNote(HTMLToText(htmlNote), note.Title, note.UpdateSequenceNum);
+            return new PlainTextEvernoteNote(HTMLToText(htmlNote), note.Title, note.UpdateSequenceNum, note.Guid);
         }
 
         public int GetLatestAccountUpdateNo()
