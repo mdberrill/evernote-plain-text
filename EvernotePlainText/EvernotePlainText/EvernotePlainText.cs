@@ -31,6 +31,10 @@ namespace EvernotePlainText
         public IEnumerable<PlainTextEvernoteNote> GetNotesChangedSinceUpdateNo(int updateNoFrom, int maxCount)
         {
             var lastChangeResult = ENSessionAdvanced.SharedSession.PrimaryNoteStore.GetFilteredSyncChunk(updateNoFrom, maxCount, new Evernote.EDAM.NoteStore.SyncChunkFilter() { IncludeNotes = true });
+            if (lastChangeResult.Notes == null || lastChangeResult.Notes.Count == 0)
+            {
+                yield break;
+            }
             foreach (var noteChanged in lastChangeResult.Notes)
             {
                 yield return GetNote(noteChanged.Guid);
